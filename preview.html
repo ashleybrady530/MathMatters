@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Math Structure Matters</title>
+  
+  <style>
+    :root {
+      --ink:#1f2933; --muted:#52606d; --border:#cbd5e1; --soft:#f7f9fb;
+      --accent:#0f5964; --accent-soft:#e9f4f5; --warning-soft:#fff8e6;
+      --warning-border:#c78c1a; --max:960px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);background:#fff;font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+    main{width:min(var(--max),calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}
+    h1,h2,h3{line-height:1.2}
+    h1{margin-bottom:.5rem}
+    h2{margin-top:0;color:var(--accent)}
+    p{max-width:78ch}
+    .intro{font-size:1.075rem;color:var(--muted)}
+    .notice{border-left:.35rem solid var(--warning-border);background:var(--warning-soft);padding:1rem 1.1rem;margin:1.5rem 0 2rem}
+    .demo{border-top:1px solid var(--border);padding:2rem 0}
+    .example{margin:1rem 0;padding:1.1rem 1.25rem;background:var(--soft);border:1px solid var(--border);border-radius:.4rem}
+    .math-large{font-size:1.45rem}
+    .compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+    .compare>section{border:1px solid var(--border);border-radius:.4rem;padding:1rem}
+    .compare h3{margin-top:0;font-size:1.05rem}
+    .preferred{border-top:.35rem solid var(--accent)!important}
+    .not-structured{border-top:.35rem solid #737373!important}
+    .tag{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.02em;padding:.15rem .45rem;border-radius:.25rem;background:var(--accent-soft);color:var(--accent)}
+    details{margin-top:1rem}
+    summary{cursor:pointer;font-weight:700}
+    pre{overflow-x:auto;white-space:pre;background:#18212b;color:#f8fafc;padding:1rem;border-radius:.35rem;font-size:.9rem;line-height:1.45}
+    code{font-family:Consolas,Monaco,"Courier New",monospace}
+    .try{margin-top:1rem;padding:1rem 1.1rem;background:var(--accent-soft);border-radius:.4rem}
+    .try h3{margin-top:0}
+    .steps{max-width:72ch}
+    .fake-math{font-family:"Times New Roman",Times,serif;font-size:1.45rem}
+    footer{border-top:1px solid var(--border);padding-top:1.5rem;color:var(--muted);font-size:.95rem}
+    @media(max-width:700px){.compare{grid-template-columns:1fr}}
+  </style>
+
+  <!-- MathJax 4: renders MathML and provides MathJax accessibility features. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<main>
+  <header>
+    <h1>Math Structure Matters</h1>
+    <p class="intro">Mathematical content can look correct on a screen while providing very different information to assistive technology. These examples demonstrate why authoring choices and mathematical structure matter.</p>
+  </header>
+
+  <aside class="notice" aria-label="Demonstration note">
+    <strong>About this demonstration:</strong> This page uses MathJax 4 to demonstrate modern mathematical accessibility features. Course platforms may use different MathJax versions, configurations, or equation editors. Follow the platform-specific guidance in the Michigan Virtual Style Guide when authoring course content.
+  </aside>
+
+  
+<section class="demo" aria-labelledby="demo1">
+  <h2 id="demo1">1. Math Within a Sentence</h2>
+  <p>
+    Mathematical notation can remain within a sentence when that placement reads naturally.
+    Creating math in an equation editor does not mean it needs to appear on its own line.
+  </p>
+
+  <div class="example">
+    <p>
+      Plot the point
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mo>(</mo><mn>3</mn><mo>,</mo><mo>−</mo><mn>2</mn><mo>)</mo>
+      </math>
+      on the coordinate plane. Then use
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>=</mo><mi>r</mi><mo>&#215;</mo><mi>t</mi></math>
+      to calculate the distance traveled.
+    </p>
+  </div>
+
+  <p>
+    The coordinate and equation are structured math, but they still fit naturally within
+    the surrounding sentence.
+  </p>
+
+  <details>
+    <summary>View MathML Structure</summary>
+    <pre><code>&lt;math&gt;
+  &lt;mo&gt;(&lt;/mo&gt;
+  &lt;mn&gt;3&lt;/mn&gt;
+  &lt;mo&gt;,&lt;/mo&gt;
+  &lt;mo&gt;−&lt;/mo&gt;
+  &lt;mn&gt;2&lt;/mn&gt;
+  &lt;mo&gt;)&lt;/mo&gt;
+&lt;/math&gt;
+
+&lt;math&gt;
+  &lt;mi&gt;d&lt;/mi&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mi&gt;r&lt;/mi&gt;
+  &lt;mi&gt;t&lt;/mi&gt;
+&lt;/math&gt;</code></pre>
+  </details>
+</section>
+
+<section class="demo" aria-labelledby="demo2">
+  <h2 id="demo2">2. Text Is Not a Variable</h2>
+  <p>
+    Simply typing letters in an equation editor identifies them as mathematical content.
+    When letters form a word, label, abbreviation, or unit, use the editor's
+    <strong>Text</strong> function.
+  </p>
+
+  <div class="comparison">
+    <div class="example">
+      <h3>Typed as ordinary math</h3>
+      <div class="math-large">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>60</mn><mo>&#160;</mo><mi>m</mi><mi>p</mi><mi>h</mi></math>
+      </div>
+      <p>
+        Here, <em>m</em>, <em>p</em>, and <em>h</em> are mathematical identifiers.
+        Math accessibility tools may interpret relationships among the letters rather
+        than the intended unit.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Using Text for the unit</h3>
+      <div class="math-large">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>60</mn><mo>&#160;</mo><mtext>mph</mtext></math>
+      </div>
+      <p>
+        Here, <strong>mph</strong> is text. It represents the unit abbreviation for
+        miles per hour rather than three mathematical variables.
+      </p>
+    </div>
+  </div>
+
+  <details>
+    <summary>View MathML Structure</summary>
+    <pre><code>&lt;!-- CourseArc/WIRIS: typed as ordinary math --&gt;
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+  &lt;mn&gt;60&lt;/mn&gt;
+  &lt;mo&gt;&amp;#160;&lt;/mo&gt;
+  &lt;mi&gt;m&lt;/mi&gt;
+  &lt;mi&gt;p&lt;/mi&gt;
+  &lt;mi&gt;h&lt;/mi&gt;
+&lt;/math&gt;
+
+&lt;!-- CourseArc/WIRIS: mph entered using Text --&gt;
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+  &lt;mn&gt;60&lt;/mn&gt;
+  &lt;mo&gt;&amp;#160;&lt;/mo&gt;
+  &lt;mtext&gt;mph&lt;/mtext&gt;
+&lt;/math&gt;</code></pre>
+  </details>
+</section>
+
+<section class="demo" aria-labelledby="demo3">
+  <h2 id="demo3">3. Structure Determines Meaning</h2>
+  <p>
+    Equation-editor templates create relationships between parts of an expression.
+    These examples come directly from CourseArc's WIRIS equation editor and show how
+    small authoring differences can change what the exponent is attached to.
+  </p>
+
+  <div class="comparison">
+    <div class="example">
+      <h3>The whole expression is squared</h3>
+      <div class="math-large">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup></math>
+      </div>
+      <p>
+        Here, the entire parenthetical expression is grouped as the base of the
+        superscript.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>A different authoring attempt, same saved structure</h3>
+      <div class="math-large">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup></math>
+      </div>
+      <p>
+        In this case, CourseArc/WIRIS normalized the author's input and saved the same
+        MathML structure as the correctly authored version. This is useful to notice:
+        different editing paths do not always result in different underlying math.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>The exponent is attached to <span aria-hidden="true">2)</span></h3>
+      <div class="math-large">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>x</mi><mo>+</mo><msup><mrow><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup></math>
+      </div>
+      <p>
+        This version can look deceptively close, but the superscript is structurally
+        attached to the grouped content <strong>2)</strong>, not to the entire
+        expression <strong>(x + 2)</strong>.
+      </p>
+    </div>
+  </div>
+
+  <p>
+    The takeaway is not to memorize the MathML. When using superscripts, subscripts,
+    fractions, radicals, or similar templates, make sure the intended content is in
+    the correct part of the equation editor before moving on.
+  </p>
+
+  <details>
+    <summary>View MathML Structure</summary>
+    <pre><code>&lt;!-- CourseArc/WIRIS: whole expression squared --&gt;
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+  &lt;msup&gt;
+    &lt;mrow&gt;
+      &lt;mo&gt;(&lt;/mo&gt;
+      &lt;mi&gt;x&lt;/mi&gt;
+      &lt;mo&gt;+&lt;/mo&gt;
+      &lt;mn&gt;2&lt;/mn&gt;
+      &lt;mo&gt;)&lt;/mo&gt;
+    &lt;/mrow&gt;
+    &lt;mn&gt;2&lt;/mn&gt;
+  &lt;/msup&gt;
+&lt;/math&gt;
+
+&lt;!-- CourseArc/WIRIS: alternate authoring attempt --&gt;
+&lt;!-- WIRIS saved the same MathML as above. --&gt;
+
+&lt;!-- CourseArc/WIRIS: exponent attached to 2) --&gt;
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+  &lt;mo&gt;(&lt;/mo&gt;
+  &lt;mi&gt;x&lt;/mi&gt;
+  &lt;mo&gt;+&lt;/mo&gt;
+  &lt;msup&gt;
+    &lt;mrow&gt;
+      &lt;mn&gt;2&lt;/mn&gt;
+      &lt;mo&gt;)&lt;/mo&gt;
+    &lt;/mrow&gt;
+    &lt;mn&gt;2&lt;/mn&gt;
+  &lt;/msup&gt;
+&lt;/math&gt;</code></pre>
+  </details>
+</section>
+
+<section class="demo" aria-labelledby="demo4">
+  <h2 id="demo4">4. Explore the Quadratic Formula</h2>
+  <p>
+    When mathematical relationships are structured correctly, MathJax can use that
+    structure for speech and expression exploration.
+  </p>
+
+  <div class="example math-large">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mtext>Quadratic Formula:</mtext>
+      <mspace width=".5em"></mspace>
+      <mi>x</mi>
+      <mo>=</mo>
+      <mfrac>
+        <mrow>
+          <mo>−</mo>
+          <mi>b</mi>
+          <mo>±</mo>
+          <msqrt>
+            <mrow>
+              <msup><mi>b</mi><mn>2</mn></msup>
+              <mo>−</mo>
+              <mn>4</mn><mi>a</mi><mi>c</mi>
+            </mrow>
+          </msqrt>
+        </mrow>
+        <mrow><mn>2</mn><mi>a</mi></mrow>
+      </mfrac>
+    </math>
+  </div>
+
+  <p>
+    <strong>Quadratic Formula</strong> is identified as text, while the formula
+    preserves nested mathematical relationships including a fraction, numerator,
+    denominator, radical, exponent, operators, and variables.
+  </p>
+
+  <div class="try">
+    <h3>Try the MathJax accessibility tools</h3>
+    <ol class="steps">
+      <li>Move keyboard focus to the formula above, or right-click it with a mouse.</li>
+      <li>Open the MathJax menu.</li>
+      <li>Explore the available speech, Braille, and expression-exploration options.</li>
+      <li>Move through individual parts of the formula and notice how the nested relationships are identified.</li>
+    </ol>
+  </div>
+
+  <details>
+    <summary>View MathML Structure</summary>
+    <pre><code>&lt;math display="block"&gt;
+  &lt;mtext&gt;Quadratic Formula:&lt;/mtext&gt;
+  &lt;mi&gt;x&lt;/mi&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mfrac&gt;
+    &lt;mrow&gt;
+      &lt;mo&gt;−&lt;/mo&gt;
+      &lt;mi&gt;b&lt;/mi&gt;
+      &lt;mo&gt;±&lt;/mo&gt;
+      &lt;msqrt&gt;
+        &lt;mrow&gt;
+          &lt;msup&gt;
+            &lt;mi&gt;b&lt;/mi&gt;
+            &lt;mn&gt;2&lt;/mn&gt;
+          &lt;/msup&gt;
+          &lt;mo&gt;−&lt;/mo&gt;
+          &lt;mn&gt;4&lt;/mn&gt;
+          &lt;mi&gt;a&lt;/mi&gt;
+          &lt;mi&gt;c&lt;/mi&gt;
+        &lt;/mrow&gt;
+      &lt;/msqrt&gt;
+    &lt;/mrow&gt;
+    &lt;mrow&gt;
+      &lt;mn&gt;2&lt;/mn&gt;
+      &lt;mi&gt;a&lt;/mi&gt;
+    &lt;/mrow&gt;
+  &lt;/mfrac&gt;
+&lt;/math&gt;</code></pre>
+  </details>
+</section>
+
+<section class="demo" aria-labelledby="mathml101">
+  <details>
+    <summary><strong id="mathml101">MathML 101</strong></summary>
+
+    <p>
+      You do not need to write MathML to create structured equations. Equation editors
+      such as WIRIS generate this structure based on how you use the editor. These are
+      some of the elements used in the examples above.
+    </p>
+
+    <dl>
+      <dt><code>&lt;mi&gt;</code></dt>
+      <dd>A mathematical identifier, such as a variable.</dd>
+
+      <dt><code>&lt;mn&gt;</code></dt>
+      <dd>A number.</dd>
+
+      <dt><code>&lt;mo&gt;</code></dt>
+      <dd>A mathematical operator or delimiter, such as +, −, =, or parentheses.</dd>
+
+      <dt><code>&lt;mtext&gt;</code></dt>
+      <dd>Text within math, such as a word, label, abbreviation, or unit.</dd>
+
+      <dt><code>&lt;mrow&gt;</code></dt>
+      <dd>
+        Groups related parts of an expression. It does not add a visible symbol by
+        itself; it helps preserve which pieces belong together.
+      </dd>
+
+      <dt><code>&lt;msup&gt;</code></dt>
+      <dd>Identifies a base and its superscript.</dd>
+
+      <dt><code>&lt;msub&gt;</code></dt>
+      <dd>Identifies a base and its subscript.</dd>
+
+      <dt><code>&lt;msubsup&gt;</code></dt>
+      <dd>Identifies a base with both a subscript and a superscript.</dd>
+
+      <dt><code>&lt;mfrac&gt;</code></dt>
+      <dd>Identifies the numerator and denominator of a fraction.</dd>
+
+      <dt><code>&lt;msqrt&gt;</code></dt>
+      <dd>Identifies the expression contained within a square root.</dd>
+
+      <dt><code>&lt;mroot&gt;</code></dt>
+      <dd>Identifies a radical with an explicit index, such as a cube root.</dd>
+    </dl>
+
+    <p>
+      <strong>The important part:</strong> authors normally create these relationships
+      by using the equation editor's fields, templates, symbols, and Text function
+      correctly. Writing the MathML tags yourself is not required.
+    </p>
+  </details>
+</section>
+
+
+  <footer>
+    <p><strong>Remember:</strong> This page demonstrates what a modern MathJax implementation can do with structured mathematical content. It is not a substitute for platform-specific authoring guidance or accessibility testing.</p>
+  </footer>
+</main>
+</body>
+</html>
